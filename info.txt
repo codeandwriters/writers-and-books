@@ -1,0 +1,25 @@
+Tipos de Modelos
+
+Cores
+Dark - tema escuro
+Light - tema claro
+
+Home
+Slider - home onpage
+Boxed - Conteudo no meio do site
+
+Tipo de livros
+Livro único
+Vários livros
+Série de Livros
+
+Autor
+Topo com menu e depois Slide
+Topo com menu sobre o slide 
+Topo só com menu sem slide
+
+Slide 
+Slide tela cheia
+Slide metade da tela
+Slide com artigos
+Slide com livro
