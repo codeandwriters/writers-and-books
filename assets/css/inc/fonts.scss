@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative&family=Mulish&display=swap&family=Gentium+Book+Basic&display=swap');
+
+body {
+    font-family: Mulish;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6, .fw-table .heading-row, .fw-package .fw-heading-row, .special-first-letter > p:first-of-type:first-letter, .special-heading-letter:first-letter, .woocommerce .price del, .woocommerce .price > span, .font-heading {
+    font-family: 'Cinzel Decorative', cursive;
+    font-style: normal;
+}
+
+h2.entry-title {
+    font-family: Gentium Book Basic;
+    font-style: normal;
+}

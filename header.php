@@ -16,7 +16,6 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
-
 	<?php wp_head(); ?>
 </head>
 
@@ -24,36 +23,44 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'writers-and-books' ); ?></a>
-
+	<nav id="header-menu" class="navbar navbar-expand-md navbar-light bg-light">
+		<div class="container">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-center" id="main-menu">
+				<?php
+				wp_nav_menu(array(
+					'theme_location' => 'left-main-menu',
+					'container' => false,
+					'menu_class' => '',
+					'fallback_cb' => '__return_false',
+					'items_wrap' => '<ul id="%1$s" class="navbar-nav animate slideIn ps-3 me-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
+					'depth' => 2,
+					'walker' => new bootstrap_5_wp_nav_menu_walker()
+				));
+				?>
+				<h1 class="text-center"><a id="main-logo" class="navbar-brand" href="#">Odinson</a></h1>
+				<?php
+				wp_nav_menu(array(
+					'theme_location' => 'right-main-menu',
+					'container' => false,
+					'menu_class' => '',
+					'fallback_cb' => '__return_false',
+					'items_wrap' => '<ul id="%1$s" class="navbar-nav animate slideIn pe-3 ms-auto mb-2 mb-md-0 %2$s">%3$s</ul>',
+					'depth' => 2,
+					'walker' => new bootstrap_5_wp_nav_menu_walker()
+				));
+				?>
+			</div>
+		</div>
+	</nav>
+	<?php if(is_single()) { ?>
+	<header id="header-top" style="background-image: url('<?php echo wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ); ?>');">
+	<?php }else { ?>
 	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$writers_and_books_description = get_bloginfo( 'description', 'display' );
-			if ( $writers_and_books_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $writers_and_books_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'writers-and-books' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
+	<?php } ?>
 	</header><!-- #masthead -->
+	<?php if(!is_home()) : ?>
+		<div class="breadcrumb container mt-5 mb-5"><?php get_breadcrumb(); ?></div>
+	<?php endif; ?>

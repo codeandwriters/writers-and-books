@@ -1,0 +1,9 @@
+input[type="text"], input[type="email"], input[type="search"], input[type="tel"], input[type="password"], textarea {
+    transition: all ease-in-out .15s;
+    display: block;
+    width: 100%;
+    padding: 13px 16px;
+    background-color: #fff;
+    border-radius: 0;
+    border: none;
+}

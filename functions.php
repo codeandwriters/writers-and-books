@@ -50,7 +50,8 @@ if ( ! function_exists( 'writers_and_books_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'writers-and-books' ),
+				'left-main-menu' => esc_html__( 'Left Menu', 'writers-and-books' ),
+				'right-main-menu' => esc_html__( 'Right Menu', 'writers-and-books' ),
 			)
 		);
 
@@ -105,6 +106,50 @@ endif;
 add_action( 'after_setup_theme', 'writers_and_books_setup' );
 
 /**
+ * Adicionar breadcrumbs ao site
+ */
+
+ function get_breadcrumb() {
+	 ?>
+	<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+	<span class="arrow"><i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></span>
+	<?php
+	if(is_category() || is_single()){
+		the_category();
+		if(is_single()){
+			echo "<span class=\"arrow\"><i class=\"fas fa-chevron-right\"></i><i class=\"fas fa-chevron-right\"></i></span>";
+			the_title();
+		}
+	}elseif(is_page()){
+		echo " / " . the_title();
+	}elseif(is_search()){
+		echo " / Resultados de busca para ";
+		the_search_query();
+	}
+ }
+
+/**
+ * Mudar o tamanho do excerpt
+ */
+
+function get_excerpt(){
+	$excerpt = get_the_content();
+	$excerpt = preg_replace(" (\[.*?\])",'',$excerpt);
+	$excerpt = strip_shortcodes($excerpt);
+	$excerpt = strip_tags($excerpt);
+	$excerpt = substr($excerpt, 0, 600);
+	$excerpt = substr($excerpt, 0, strripos($excerpt, " "));
+	$excerpt = trim(preg_replace( '/\s+/', ' ', $excerpt));
+	return $excerpt;
+}
+
+/**
+ * Add plugin que converte menu bootstrap em wordpress
+ */
+
+require get_template_directory() . '/plugins/bootstrap_5_wp_nav_menu_walker.php';
+
+/**
  * Set the content width in pixels, based on the theme's design and stylesheet.
  *
  * Priority 0 to make it available to lower priority callbacks.
@@ -141,9 +186,15 @@ add_action( 'widgets_init', 'writers_and_books_widgets_init' );
  */
 function writers_and_books_scripts() {
 	wp_enqueue_style( 'writers-and-books-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_enqueue_style( 'writers-and-books-fontawesome', get_template_directory_uri().'/node_modules/@fortawesome/fontawesome-free/css/all.css', array(), _S_VERSION );
+	wp_enqueue_style( 'writers-and-books-bootstrap', get_template_directory_uri().'/node_modules/bootstrap/dist/css/bootstrap.css', array(), _S_VERSION );
+	wp_enqueue_style( 'writers-and-books-main', get_template_directory_uri().'/assets/css/main.css', array(), _S_VERSION );
 	wp_style_add_data( 'writers-and-books-style', 'rtl', 'replace' );
 
 	wp_enqueue_script( 'writers-and-books-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'writers-and-books-jquery', get_template_directory_uri() . '/node_modules/jquery/dist/jquery.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'writers-and-books-bootstrap', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.bundle.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'writers-and-books-main', get_template_directory_uri() . '/assets/js/main.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

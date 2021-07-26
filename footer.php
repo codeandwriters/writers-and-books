@@ -11,19 +11,12 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
+	<footer id="colophon" class="site-footer container-fluid p-5 text-center text-white bg-dark">
 		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'writers-and-books' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'writers-and-books' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'writers-and-books' ), 'writers-and-books', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
+			<?php
+			/* translators: 1: Theme name, 2: Theme author. */
+			printf( esc_html__( 'Tema: %1$s %2$s', 'writers-and-books' ), 'Writers and Books', '<br>Desenvolvido para <a href="http://rodzandonadi.com">Rod Zandonadi</a>' );
+			?>
 		</div><!-- .site-info -->
 	</footer><!-- #colophon -->
 </div><!-- #page -->

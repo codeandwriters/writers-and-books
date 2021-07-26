@@ -1,0 +1,19 @@
+.search-form {
+    .search-form-wrapper {
+        .search-form-input {
+            display: inline-block;
+            padding-right: 60px;
+            height: 45px;
+        }
+        .btn-search {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45px;
+            height: 45px;
+            padding: 0;
+            border: none;
+            border-left: 1px solid #ddd;
+        }
+    }
+}
