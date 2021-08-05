@@ -15,12 +15,6 @@
 		echo "<header class=\"entry-header\">";
 		the_title( '<h1 class="entry-title">', '</h1>' );
 		?>
-		<div class="entry-meta">
-			<?php
-			writers_and_books_posted_on();
-			writers_and_books_posted_by();
-			?>
-		</div><!-- .entry-meta -->
 		</header>"
 		<div class="entry-content">
 			<?php

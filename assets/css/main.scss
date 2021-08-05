@@ -59,12 +59,7 @@ img {
         color: #61bfad;
         font-size: 56px;
         margin-bottom: 50px;
-        &:first-letter {
-            text-transform: capitalize;
-            font-size: 5rem;
-            border: solid #61bfad 1px;
-            padding: 10px 15px;
-        }
+        @include first-letter;
     }
     .page-subtitle {
         margin-top: 20px;

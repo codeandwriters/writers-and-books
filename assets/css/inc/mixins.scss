@@ -1,0 +1,11 @@
+/* Mixins */
+
+@mixin first-letter {
+    &:first-letter {
+        text-transform: capitalize;
+        font-size: 5rem;
+        color: #61bfad;
+        border: solid #61bfad 1px;
+        padding: 10px 15px;
+    }
+}
